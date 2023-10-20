@@ -23,3 +23,16 @@ void GyroHandler::data()
     Serial.println(mpu6050.getAngleZ());
     vTaskDelay(300);
 }
+
+// void GyroHandler::Calc(int tanggalset)
+// {
+    
+//     int tanggalnow = waktu.tanggal();
+//     int jamnow = waktu.jam();
+//     if (tanggalnow == tanggalset){
+//         Serial.println("uji coba 1 works");
+//     }
+
+//     vTaskDelay(3000); 
+// }
+

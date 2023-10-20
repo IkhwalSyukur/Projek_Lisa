@@ -14,8 +14,8 @@ void setup()
     Serial.begin(115200);
     gyro.begin();
     waktu.begin();
-    xTaskCreate(task_gyro,"task for gyro",4096,NULL,1,NULL);
-    xTaskCreate(task_rtc,"task for rtc",4096,NULL,1,NULL);
+    // xTaskCreatePinnedToCore(task_gyro, "Handle gyro task", 1024 * 2 , NULL, 1, NULL, 1);
+    xTaskCreatePinnedToCore(task_rtc, "Handle rtc task", 1024 *  2, NULL, 5, NULL, 1);
 }
 
 void loop()
@@ -33,6 +33,6 @@ void task_gyro(void  *pvParameter){
 void task_rtc(void  *pvParameter){
     while (1)
     {
-        waktu.data();
+        waktu.hasilsudut(24);
     }
 }

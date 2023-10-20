@@ -8,4 +8,7 @@ class GyroHandler
     public :
         bool begin();
         void data();
+    
+    private :
+        // int tanggalset = 20;
 };

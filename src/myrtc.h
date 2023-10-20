@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 #include "RTClib.h"
+#include "myArray.h"
+#include "math.h"
 
 class RTCHandler
 {
@@ -11,4 +13,9 @@ class RTCHandler
     public:
         bool begin();
         void data();
+        int tanggal();
+        int bulan();
+        int jam();
+        void calc(int tanggalset);
+        float hasilsudut(int tanggalacuan);
 };

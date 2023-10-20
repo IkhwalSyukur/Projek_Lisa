@@ -1,10 +1,11 @@
-#pragma once
 #include "myrtc.h"
 
 RTC_DS3231 rtc;
+ArrayHandler mydata;
 
 bool RTCHandler::begin()
 {
+    mydata.init();
     if (! rtc.begin()) {
     Serial.println("Couldn't find RTC");
     Serial.flush();
@@ -42,4 +43,43 @@ void RTCHandler::data()
     Serial.print(now.second(), DEC);
     Serial.println();
     vTaskDelay(500);
+}
+
+int RTCHandler::tanggal()
+{
+    DateTime now = rtc.now();
+    return now.day();
+}
+
+int RTCHandler::bulan()
+{
+    DateTime now = rtc.now();
+    return now.month();
+}
+
+int RTCHandler::jam()
+{
+    DateTime now = rtc.now();
+    return now.hour();
+}
+
+void RTCHandler::calc(int tanggalset)
+{
+    DateTime now = rtc.now();
+    int tanggalnow = now.day();
+    if (tanggalnow == tanggalset){
+        Serial.println("tes 1 success");
+    }
+    else{
+        Serial.println("tes failed");
+    }
+    vTaskDelay(300);
+}
+
+float RTCHandler::hasilsudut(int tanggalacuan)
+{
+    int myindex = mydata.data(tanggalacuan);
+    float sudutnya = mydata.sudut(myindex);
+    vTaskDelay(500);
+    return sudutnya;    
 }
