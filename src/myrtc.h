@@ -17,5 +17,6 @@ class RTCHandler
         int bulan();
         int jam();
         void calc(int tanggalset);
-        float hasilsudut(int tanggalacuan);
+        float hasilsudut();
+        int sudutupdate();
 };

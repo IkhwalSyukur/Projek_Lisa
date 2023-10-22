@@ -76,10 +76,50 @@ void RTCHandler::calc(int tanggalset)
     vTaskDelay(300);
 }
 
-float RTCHandler::hasilsudut(int tanggalacuan)
+float RTCHandler::hasilsudut()
 {
+    DateTime now = rtc.now();
+    int tanggalacuan = now.day();
     int myindex = mydata.data(tanggalacuan);
     float sudutnya = mydata.sudut(myindex);
     vTaskDelay(500);
     return sudutnya;    
+}
+
+int RTCHandler::sudutupdate()
+{
+    DateTime now = rtc.now();
+    int jamnow = now.hour();
+    if (jamnow == 12){
+        return 0;
+    }
+    else if (jamnow == 11)
+    {
+        return -30;
+    }
+    else if (jamnow == 10)
+    {
+        return -60;
+    }
+    else if (jamnow == 9)
+    {
+        return -90;
+    }
+    
+    else if (jamnow == 1)
+    {
+        return 30;
+    }
+    else if (jamnow == 2)
+    {
+        return 60;
+    }
+    else if (jamnow == 3)
+    {
+        return 90;
+    }
+    else{
+        return 0;
+    }
+    vTaskDelay(500);
 }

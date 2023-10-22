@@ -52,7 +52,7 @@ int ArrayHandler::data(int targettanggal)
   }
 
   if (foundIndex != -1) {
-    Serial.println("Item found at index " + String(foundIndex));
+    // Serial.println("Item found at index " + String(foundIndex));
   } else {
     Serial.println("Item not found in the array");
   }
@@ -64,7 +64,7 @@ float ArrayHandler::sudut(int dataindex)
 {
   int index = dataindex;
   if (index >= 0 && index < thissudut.size()) {
-    Serial.println(thissudut[index]);
+    // Serial.println(thissudut[index]);
   } else {
     Serial.println("Index out of bounds");
   }

@@ -1,6 +1,7 @@
 #include "mygyro.h"
 
 MPU6050 mpu6050(Wire);
+RTCHandler mytime;
 
 bool GyroHandler::begin()
 {
@@ -24,15 +25,31 @@ void GyroHandler::data()
     vTaskDelay(300);
 }
 
-// void GyroHandler::Calc(int tanggalset)
-// {
-    
-//     int tanggalnow = waktu.tanggal();
-//     int jamnow = waktu.jam();
-//     if (tanggalnow == tanggalset){
-//         Serial.println("uji coba 1 works");
-//     }
+void GyroHandler::calc()
+{
+    mpu6050.update();
+    float suduttarget = mytime.hasilsudut();
+    float sudutnow = mpu6050.getAngleX();
+    float updatesudut = mytime.hasilsudut() + mytime.sudutupdate();
 
-//     vTaskDelay(3000); 
-// }
+    if (suduttarget != updatesudut){
+        suduttarget = updatesudut;
+    }
+
+    if (int(sudutnow)<int(suduttarget)){
+        Serial.printf("Sudut now : %f\n", sudutnow);
+        Serial.printf("Sudut Target : %f\n", suduttarget);
+        Serial.println("Maju");
+    }
+    else if (int(sudutnow)>int(suduttarget))
+    {
+        Serial.printf("Sudut now : %f\n", sudutnow);
+        Serial.printf("Sudut Target : %f\n", suduttarget);
+        Serial.println("Mundur");
+    }
+    else{
+        Serial.println("Standby");
+    }
+    vTaskDelay(100);
+}
 
