@@ -1,5 +1,7 @@
-#include "main_app.h"
+// #include "main_app.h"
 // #include "tes/i2cscanner.h"
 // #include "tes/mygyro.h"
 // #include "tes/myrtc.h"
 // #include "tes/tesArray.h"
+// #include  "tes/myina.h"
+#include "tes/myldr.h"

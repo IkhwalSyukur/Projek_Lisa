@@ -2,7 +2,7 @@
 // Date and time functions using a DS3231 RTC connected via I2C and Wire lib
 #include "RTClib.h"
 
-RTC_DS3231 rtc;
+RTC_DS3231 tesrtc;
 
 char daysOfTheWeek[7][12] = {"Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
 
@@ -13,32 +13,33 @@ void setup () {
   while (!Serial); // wait for serial port to connect. Needed for native USB
 #endif
 
-  if (! rtc.begin()) {
+  if (! tesrtc.begin()) {
     Serial.println("Couldn't find RTC");
     Serial.flush();
     while (1) delay(10);
   }
 
-  if (rtc.lostPower()) {
+  if (tesrtc.lostPower()) {
     Serial.println("RTC lost power, let's set the time!");
     // When time needs to be set on a new device, or after a power loss, the
     // following line sets the RTC to the date & time this sketch was compiled
-    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+    // tesrtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // This line sets the RTC with an explicit date & time, for example to set
     // January 21, 2014 at 3am you would call:
-    // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
+    // tesrtc.adjust(DateTime(2023, 10, 23, 9, 44, 0));
   }
 
   // When time needs to be re-set on a previously configured device, the
-  // following line sets the RTC to the date & time this sketch was compiled
+  // following line sets the tesrtc to the date & time this sketch was compiled
   // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   // This line sets the RTC with an explicit date & time, for example to set
   // January 21, 2014 at 3am you would call:
   // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
+  tesrtc.adjust(DateTime(2023, 10, 23, 9, 47, 0));
 }
 
 void loop () {
-    DateTime now = rtc.now();
+    DateTime now = tesrtc.now();
 
     Serial.print(now.year(), DEC);
     Serial.print('/');
@@ -79,7 +80,7 @@ void loop () {
     Serial.println();
 
     Serial.print("Temperature: ");
-    Serial.print(rtc.getTemperature());
+    Serial.print(tesrtc.getTemperature());
     Serial.println(" C");
 
     Serial.println();

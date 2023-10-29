@@ -42,7 +42,7 @@ void RTCHandler::data()
     Serial.print(':');
     Serial.print(now.second(), DEC);
     Serial.println();
-    vTaskDelay(500);
+    // vTaskDelay(500);
 }
 
 int RTCHandler::tanggal()
@@ -82,7 +82,7 @@ float RTCHandler::hasilsudut()
     int tanggalacuan = now.day();
     int myindex = mydata.data(tanggalacuan);
     float sudutnya = mydata.sudut(myindex);
-    vTaskDelay(500);
+    vTaskDelay(100);
     return sudutnya;    
 }
 

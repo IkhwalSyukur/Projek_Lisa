@@ -8,7 +8,7 @@ bool GyroHandler::begin()
     Serial.begin(115200);
     Wire.begin();
     mpu6050.begin();
-    mpu6050.calcGyroOffsets(true);
+    mpu6050.calcGyroOffsets();
 
     return true;
 }
@@ -17,11 +17,7 @@ void GyroHandler::data()
 {
     mpu6050.update();
     Serial.print("angleX : ");
-    Serial.print(mpu6050.getAngleX());
-    Serial.print("\tangleY : ");
-    Serial.print(mpu6050.getAngleY());
-    Serial.print("\tangleZ : ");
-    Serial.println(mpu6050.getAngleZ());
+    Serial.println(mpu6050.getAngleX());
     vTaskDelay(300);
 }
 
