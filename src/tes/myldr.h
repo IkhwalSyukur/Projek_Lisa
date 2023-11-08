@@ -9,9 +9,10 @@ const int ldr4 = 33;
 
 void setup(){
     Serial.begin(115200);
+    pinMode(ldr1, INPUT_PULLUP);
 }
 
 void loop(){
     Serial.printf("LDR1 = %d\n", analogRead(ldr1));
-    vTaskDelay(500);
+    vTaskDelay(100);
 }

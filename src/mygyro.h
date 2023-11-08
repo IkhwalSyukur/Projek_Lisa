@@ -10,6 +10,8 @@ class GyroHandler
         bool begin();
         void data();
         void calc();
+        float target();
+        float now();
     
     private :
         // int tanggalset = 20;

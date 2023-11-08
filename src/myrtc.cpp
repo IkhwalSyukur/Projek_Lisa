@@ -19,7 +19,7 @@ bool RTCHandler::begin()
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // This line sets the RTC with an explicit date & time, for example to set
     // January 21, 2014 at 3am you would call:
-    // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
+    // rtc.adjust(DateTime(2023, 11, 5, 13, 27, 0));
     }
 
     return true;
@@ -90,6 +90,7 @@ int RTCHandler::sudutupdate()
 {
     DateTime now = rtc.now();
     int jamnow = now.hour();
+    Serial.printf("Jam Now = %d\n",jamnow);
     if (jamnow == 12){
         return 0;
     }
@@ -106,15 +107,15 @@ int RTCHandler::sudutupdate()
         return -90;
     }
     
-    else if (jamnow == 1)
+    else if (jamnow == 13)
     {
         return 30;
     }
-    else if (jamnow == 2)
+    else if (jamnow == 14)
     {
         return 60;
     }
-    else if (jamnow == 3)
+    else if (jamnow == 15)
     {
         return 90;
     }

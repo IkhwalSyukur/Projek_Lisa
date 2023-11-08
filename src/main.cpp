@@ -4,4 +4,6 @@
 // #include "tes/myrtc.h"
 // #include "tes/tesArray.h"
 // #include  "tes/myina.h"
-#include "tes/myldr.h"
+// #include "tes/myldr.h"
+// #include "tes/mymotor.h"
+#include "tes/tesBlynk.h"
