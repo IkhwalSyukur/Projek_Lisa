@@ -12,33 +12,33 @@ void ArrayHandler::init()
     Serial.begin(115200);
 
   // Add items to the std::array
-  thistanggal[0] = 5;
-  thistanggal[1] = 6;
-  thistanggal[2] = 7;
-  thistanggal[3] = 8;
-  thistanggal[4] = 9;
-  thistanggal[5] = 10;
-  thistanggal[6] = 11;
-  thistanggal[7] = 12;
-  thistanggal[8] = 13;
-  thistanggal[9] = 14;
-  thistanggal[10] = 15;
-  thistanggal[11] = 16;
-  thistanggal[12] = 17;
+  thistanggal[0] = 27;
+  thistanggal[1] = 28;
+  thistanggal[2] = 29;
+  thistanggal[3] = 30;
+  thistanggal[4] = 31;
+  thistanggal[5] = 1;
+  thistanggal[6] = 2;
+  thistanggal[7] = 3;
+  thistanggal[8] = 4;
+  thistanggal[9] = 5;
+  thistanggal[10] = 6;
+  thistanggal[11] = 7;
+  thistanggal[12] = 8;
 
-  thissudut[0] = -16,58121484;
-  thissudut[1] = -16,86540747;
-  thissudut[2] = -17,14460252;
-  thissudut[3] = -17,41871725;
-  thissudut[4] = -17,68767045;
-  thissudut[5] = -17,9513824;
-  thissudut[6] = -18,20977497;
-  thissudut[7] = -18,7102973;
-  thissudut[8] = -18,95227874;
-  thissudut[9] = -19,18864421;
-  thissudut[10] = -19,41932367;
-  thissudut[11] = -19,64424877;
-  thissudut[12] = -19,86335285;
+  thissudut[0] = -23,36412081;
+  thissudut[1] = -23,31722192;
+  thissudut[2] = -23,26341363;
+  thissudut[3] = -23,2027119;
+  thissudut[4] = -23,13513469;
+  thissudut[5] = -23,06070205;
+  thissudut[6] = -22,97943603;
+  thissudut[7] = -22,8913607;
+  thissudut[8] = -22,79650216;
+  thissudut[9] = -22,69488853;
+  thissudut[10] = -22,58654992;
+  thissudut[11] = -22,47151842;
+  thissudut[12] = -22,34982813;
 }
 
 int ArrayHandler::data(int targettanggal)

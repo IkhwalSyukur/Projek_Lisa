@@ -26,21 +26,21 @@ void  LDRHandler::read()
     int read3 = analogRead(ldr3);
     int read4 = analogRead(ldr4);
 
-    Serial.printf("LDR1 = %d\n", read1);
+    // Serial.printf("LDR1 = %d\n", read1);
     Serial.printf("LDR2 = %d\n", read2);
-    Serial.printf("LDR3 = %d\n", read3);
+    // Serial.printf("LDR3 = %d\n", read3);
     Serial.printf("LDR4 = %d\n", read4);
 
-    if(read4<100 && read2>100)
+    if(read4<50 && read2>50)
     {
-        motor.motor2kanan(200);
-        motor.kanan(200);
+        motor.motor2kanan(100);
+        // motor.kanan(200);
     }
 
-    else if (read2<100 && read4>100)
+    else if (read2<50 && read4>50)
     {
-        motor.motor2kiri(200);
-        motor.kiri(200);
+        motor.motor2kiri(100);
+        // motor.kiri(200);
     }
 
     else{
@@ -48,4 +48,16 @@ void  LDRHandler::read()
     }
 
     vTaskDelay(100);
+}
+
+void LDRHandler::readM(){
+    int read1 = analogRead(ldr1);
+    int read2 = analogRead(ldr2);
+    int read3 = analogRead(ldr3);
+    int read4 = analogRead(ldr4);
+
+    // Serial.printf("LDR1 = %d\n", read1);
+    Serial.printf("LDR2 = %d\n", read2);
+    // Serial.printf("LDR3 = %d\n", read3);
+    Serial.printf("LDR4 = %d\n", read4);
 }

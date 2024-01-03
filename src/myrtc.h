@@ -19,4 +19,5 @@ class RTCHandler
         void calc(int tanggalset);
         float hasilsudut();
         int sudutupdate();
+        int lastsecond();
 };

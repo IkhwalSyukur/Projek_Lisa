@@ -12,6 +12,7 @@ class GyroHandler
         void calc();
         float target();
         float now();
+        void ajimuth();
     
     private :
         // int tanggalset = 20;

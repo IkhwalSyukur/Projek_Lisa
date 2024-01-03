@@ -6,4 +6,5 @@ class LDRHandler
     public:
     void begin();
     void read();
+    void readM();
 };

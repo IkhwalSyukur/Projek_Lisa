@@ -4,13 +4,18 @@
 #define SDA_2 17
 #define SCL_2 16
 
+// LiquidCrystal_I2C teslcd(0x27,16,2);
+
 void setup()
 {
   Wire.begin();
   Wire1.begin(SDA_2, SCL_2);
   Serial.begin(115200);
+//   teslcd.init();
+//   teslcd.backlight();
   while (!Serial);             
   Serial.println("\nI2C Scanner");
+//   teslcd.print("I2C Scanner");
 }
 
 void loop()

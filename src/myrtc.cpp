@@ -19,7 +19,7 @@ bool RTCHandler::begin()
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // This line sets the RTC with an explicit date & time, for example to set
     // January 21, 2014 at 3am you would call:
-    // rtc.adjust(DateTime(2023, 11, 5, 13, 27, 0));
+    // rtc.adjust(DateTime(2023, 11, 9, 10, 40, 0));
     }
 
     return true;
@@ -96,31 +96,43 @@ int RTCHandler::sudutupdate()
     }
     else if (jamnow == 11)
     {
-        return -30;
+        return -15;
     }
     else if (jamnow == 10)
     {
-        return -60;
+        return -30;
     }
     else if (jamnow == 9)
     {
-        return -90;
+        return -45;
     }
     
     else if (jamnow == 13)
     {
-        return 30;
+        return 15;
     }
     else if (jamnow == 14)
     {
-        return 60;
+        return 30;
     }
     else if (jamnow == 15)
     {
-        return 90;
+        return 45;
+    }
+    else if (jamnow == 16)
+    {
+        return 60;
     }
     else{
         return 0;
     }
     vTaskDelay(500);
+}
+
+int RTCHandler::lastsecond(){
+    DateTime now = rtc.now();
+    DateTime referenceTime(2000, 1, 1, 0, 0, 0);
+    long elapsedSeconds = (now - referenceTime).totalseconds();
+
+    return elapsedSeconds;
 }

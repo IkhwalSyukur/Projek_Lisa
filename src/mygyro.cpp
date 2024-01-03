@@ -1,10 +1,12 @@
 #include "mygyro.h"
 #include "myMotor.h"
 #include "LiquidCrystal_I2C.h"
+#include "mysolar.h"
 
 MPU6050 mpu6050(Wire);
 RTCHandler mytime;
 myMotor motorA;
+SolarPositionDemo solar;
 LiquidCrystal_I2C lcd(0x27,16,2);
 
 bool GyroHandler::begin()
@@ -13,8 +15,8 @@ bool GyroHandler::begin()
     Wire.begin();
     lcd.init();
     lcd.backlight();
-    lcd.print("Calibrating...");
     mpu6050.begin();
+    lcd.print("Calibrating...");
     mpu6050.calcGyroOffsets(true);
     motorA.init();
     
@@ -25,9 +27,26 @@ bool GyroHandler::begin()
 void GyroHandler::data()
 {
     mpu6050.update();
-    Serial.print("angleX : ");
-    Serial.println(mpu6050.getAngleX());
-    vTaskDelay(300);
+    float suduttarget = mytime.hasilsudut();
+    float sudutnow = mpu6050.getAngleX();
+    float updatesudut = mytime.hasilsudut() + mytime.sudutupdate();
+    // Serial.printf("Sudut now : %f\n", sudutnow);
+    // Serial.printf("Sudut Target : %f\n", updatesudut);
+
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("S.T= ");
+    lcd.setCursor(4,0);
+    lcd.print(updatesudut,0);
+    lcd.setCursor(0,1);
+    lcd.print("S.S= ");
+    lcd.setCursor(4,1);
+    lcd.print(sudutnow,0);
+
+    if (suduttarget != updatesudut){
+        suduttarget = updatesudut;
+    }
+    vTaskDelay(100);
 }
 
 void GyroHandler::calc()
@@ -39,30 +58,30 @@ void GyroHandler::calc()
 
     lcd.clear();
     lcd.setCursor(0,0);
-    lcd.print("Target = ");
-    lcd.setCursor(10,0);
-    lcd.print(updatesudut);
+    lcd.print("S.T= ");
+    lcd.setCursor(4,0);
+    lcd.print(updatesudut,0);
     lcd.setCursor(0,1);
-    lcd.print("Now = ");
-    lcd.setCursor(7,1);
-    lcd.print(sudutnow);
+    lcd.print("S.S= ");
+    lcd.setCursor(4,1);
+    lcd.print(sudutnow,0);
 
     if (suduttarget != updatesudut){
         suduttarget = updatesudut;
     }
 
-    if (int(sudutnow)<int(suduttarget-2)){
+    if (int(sudutnow)<int(suduttarget-3)){
         Serial.printf("Sudut now : %f\n", sudutnow);
         Serial.printf("Sudut Target : %f\n", suduttarget);
         Serial.println("Maju");
-        motorA.kanan(200);
+        motorA.kiri(70);
     }
-    else if (int(sudutnow)>int(suduttarget+2))
+    else if (int(sudutnow)>int(suduttarget+3))
     {
         Serial.printf("Sudut now : %f\n", sudutnow);
         Serial.printf("Sudut Target : %f\n", suduttarget);
         Serial.println("Mundur");
-        motorA.kiri(200);
+        motorA.kanan(70);
     }
     else{
         Serial.println("Standby");
@@ -83,5 +102,28 @@ float GyroHandler::now()
     mpu6050.update();
     float sudutnow = mpu6050.getAngleX();
     return sudutnow;
+}
+
+void GyroHandler::ajimuth()
+{
+    mpu6050.update();
+    int detik = mytime.lastsecond();
+    float azimuth_target = (solar.runDemo(detik));
+    float azimuth_now = mpu6050.getAngleZ();
+    Serial.printf("Azimuth = %.2f\n", azimuth_target);
+    Serial.printf("Sudut Z = %.2f\n", azimuth_now);
+
+    // lcd.clear();
+    lcd.setCursor(8,0);
+    lcd.print("A.T= ");
+    lcd.setCursor(13,0);
+    lcd.print(azimuth_target,0);
+    lcd.setCursor(8,1);
+    lcd.print("A.S= ");
+    lcd.setCursor(13,1);
+    lcd.print(azimuth_now,0);
+
+    vTaskDelay(100);
+    
 }
 
